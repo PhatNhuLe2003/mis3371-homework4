@@ -1,0 +1,348 @@
+<!--
+Program name: index.html
+Author: Phat Le
+Date created: 02/08/2026
+Date last edited: 04/15/2026
+Version: 3.0
+Description: This is my 3rd assignment submission for creating a Medical form but this timr I add more descriptive features using additional coding (Javascript).
+In the HTML code, I added a couple constructure in order for the HTML form to work with the Javascript I created. Furthermore, I added a verification button in order to veifiy the users input before they can submit the form.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aegis Medical – Patient Registration</title>
+    <link rel="stylesheet" href="color.css">
+</head>
+
+<body onload="showDate()">
+
+<!-- ================= BANNER ================= -->
+<div id="banner">
+    <img src="Medical Caduceus logo.png" style="width:200px; height:auto;" alt="Aegis Medical Logo">
+    <div id="banner-text">
+        <h1>
+            <span class="aegis">Aegis</span>
+            <span class="medical">Medical</span>
+        </h1>
+        <p>Today is: <span id="today"></span></p>
+    </div>
+</div>
+
+<h2>Registration Form</h2>
+
+<!-- ================= FORM ================= -->
+<form action="thankyou.html" onsubmit="return validateForm()">
+
+<table class="form-table">
+    
+<!-- NAME -->
+<tr>
+      <td colspan="2">First Name <span class="required">*</span></td>
+      <td>M.I.</td>
+      <td colspan="3">Last Name <span class="required">*</span></td>
+</tr>
+    
+<tr>
+    <td colspan="2">
+        <input type="text" name="first_name" id="first_name" maxlength="30" required
+            oninput="validateFirstName()"
+            onblur="validateFirstName()"
+            pattern="[A-Za-z'-]{1,30}"
+            title="Enter 1-30 characters. Letters, apostrophes, and dashes only">
+        <div id="firstNameError" class="error-message"></div>
+    </td>
+    
+     <td colspan="1">
+        <input type="text" name="middle_initial" id="middle_initial" maxlength="1"
+            oninput="validateMiddleInitial()"
+            onblur="validateMiddleInitial()"
+            pattern="[A-Za-z]?"
+            title="Enter one letter only">
+         <div id="middleInitialError" class="error-message"></div>
+    </td>
+    
+  <td colspan="3">
+    <input type="text" name="last_name" id="last_name" maxlength="30" required
+        oninput="validateLastName()"
+        onblur="validateLastName()"
+        pattern="[A-Za-z'-]{1,30}"
+        title="Enter 1-30 characters, Letters, apostrophes, and dashes only">
+      <div id="lastNameError" class="error-message"></div>
+  </td>
+</tr>
+<!-- DOB / SSN -->
+<tr>
+    <td colspan="3">Date of Birth (MM/DD/YYYY) <span class="required">*</span></td>
+    <td colspan="3">Social Security Number <span class="required">*</span></td>
+</tr>
+<tr>
+    <td colspan="3">
+        <input type="date" name="dob" id="dob" required
+                onblur="validateDOB()"
+                oninput="validateDOB()"
+                min="1900-01-01"
+                max="2026-12-31"
+                title="Select a valid birth date">
+        <div id="dobError" class="error-message"></div>
+    </td>
+    <td colspan="3">
+        <input type="password" name="ssn" id="ssn"
+            oninput="validateSSN()"
+            onblur="validateSSN()"
+            placeholder="xxx-xx-xxxx" 
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"
+            title="Format: 123-45-6789" 
+            required>
+        <div id="ssnError" class="error-message"></div>
+    </td>
+</tr>
+
+<!-- ================= ADDRESS ================= -->
+<tr>
+    <td colspan="3">Address 1 <span class="required">*</span></td>
+    <td>City <span class="required">*</span></td>
+    <td>State <span class="required">*</span></td>
+    <td>Zip <span class="required">*</span></td>
+</tr>
+<tr>
+    <td colspan="3">
+        <input type="text" name="address1" id="address1"
+               oninput="validateAddress1()"
+               onblur="validateAddress1()" 
+               maxlength="30" required
+               pattern="[A-Za-z0-9\s\.\-#]{5,30}"
+               title="5-30 characters. Letters, numbers, spaces, ., -, # allowed">
+        <div id="address1Error" class="error-message"></div>
+    </td>
+    <td>
+        <input type="text" name="city1" id="city1" 
+               oninput="validateCity1()"
+               onblur="validateCity1()" 
+               maxlength="30" required
+               pattern="[A-Za-z\s]{2,30}" 
+               title="City must be 2-30 letters only">
+        <div id="city1Error" class="error-message"></div>
+    </td>
+    <td>
+        <select name="state1" id="state1"
+                onchange="validateState1()"
+                onblur="validateState1()"
+                required>
+            <option value="" selected disabled>Select</option>
+                <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                <option>WI</option><option>WY</option><option>DC</option><option>PR</option>
+        </select>
+        <div id="state1Error" class="error-message"></div>
+    </td>
+    <td><input type="text" name="zip1" id="zip1" 
+                oninput="validateZip1()"
+                onblur="validateZip1()"
+                maxlength="10"
+                pattern="[0-9]{5}(-[0-9]{4})?"
+                title="Enter 5-digit ZIP or ZIP+4"
+                required>
+        <div id="zip1Error" class="error-message"></div>
+    </td>
+</tr>
+
+<tr>
+    <td colspan="3">Address 2</td>
+    <td>City</td>
+    <td>State</td>
+    <td>Zip</td>
+</tr>
+<tr>
+    <td colspan="3">
+    <input type="text" maxlength="30"
+           pattern="[A-Za-z0-9\s\.\-#]{0,30}"
+           title="Optional. Letters, numbers, spaces, ., -, # allowed">
+    </td>
+    <td>
+        <input type="text" maxlength="30"
+               pattern="[A-Za-z\s]{0,30}"
+               title="Optional city (letters only)">
+    </td>
+    <td>
+        <select>
+            <option>Select</option>
+                <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                <option>WI</option><option>WY</option><option>DC</option><option>PR</option>
+        </select>
+    </td>
+    <td><input type="text" maxlength="10"></td>
+</tr>
+
+<!-- CONTACT -->
+<tr>
+    <td colspan="2">Email <span class="required">*</span></td>
+    <td colspan="3">Phone Number <span class="required">*</span></td>
+</tr>
+<tr>
+    <td colspan="2"><input type="email" name="email" id="email" required
+                            oninput="validateEmail()"
+                            onblur="validateEmail()"
+                            maxlength="50"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}"
+                            title="Enter a valid email (example: name@email.com)">
+        <div id="emailError" class="error-message"></div>
+    </td>
+    <td colspan="3"><input type="tel" name="phone" id="phone"
+                            oninput="validatePhone()"
+                            onblur="validatePhone()"
+                            placeholder="123-456-7890"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            maxlength="12"
+                            title="Format: 123-456-7890"
+                            required>
+        <div id="phoneError" class="error-message"></div>
+    </td>   
+</tr>
+
+<!-- LOGIN -->
+<tr>
+    <td>User ID <span class="required">*</span></td>
+    <td colspan="2">Password <span class="required">*</span></td>
+    <td colspan="2">Confirm Password <span class="required">*</span></td>
+</tr>
+<tr>
+    <td><input type="text" name="user_id" id="user_id"
+               oninput="validateUserId()"
+               onblur="validateUserId()"             
+               maxlength="20" required
+               pattern="^[a-zA-Z][a-zA-Z0-9_-]{4,19}$"
+               title="User ID must be 5-20 characters, letters and numbers only (no spaces)">
+        <div id="userIdError" class="error-message"></div>
+    </td>
+    
+    <td colspan="2"><input type="password" name="password" id="password" required
+                           pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,20}$" 
+                           title="Password must be 8-20 characters. Must include uppercase, lowercase, number, and special character"                       
+                           oninput="validatePassword()"
+                           onblur="validatePassword()">
+    </td>
+    <td colspan="2"><input type="password" name="confirm_password" id="confirm_password" required
+                           oninput="validatePassword()">
+        
+        <div id="passwordError" style="color:red; font-size:12px;"></div>
+    </td>
+</tr>
+
+<!-- RADIOS -->
+<tr>
+    <td colspan="6">
+        Gender <span class="required">*</span>:
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+    </td>
+</tr>
+
+<tr>
+    <td colspan="6">
+        Do you have health insurance? <span class="required">*</span>
+        <input type="radio" name="insurance" value="Yes" required> Yes
+        <input type="radio" name="insurance" value="No"> No
+    </td>
+</tr>
+
+<tr>
+    <td colspan="6">
+        Do you consent to the release of medical information? <span class="required">*</span>
+        <input type="radio" name="consent" value="Yes" required> Yes
+        <input type="radio" name="consent" value="No"> No
+    </td>
+</tr>
+
+<!-- SLIDER -->
+<tr>
+    <td colspan="6">
+        On a scale of 1 (None) to 10 (Extremely), how much pain are you feeling currently? <span class="required">*</span><br><br>
+
+        <div style="width:25%;">
+            <span style="float:left;">1</span>
+            <span style="float:right;">10</span>
+            
+            <input type="range" name="pain_scale" id="pain" 
+                   min="1" max="10" value="5"
+                   oninput="updatePainValue()"
+                   style="width:100%;" required>
+        </div> 
+        
+            Selected Value: <span id="painValue">5</span>
+    </td>
+</tr>
+    
+<!-- MEDICAL -->
+<tr>
+    <td colspan="3">
+        <strong class="section-title">Medical History</strong><br>
+        <input type="checkbox" name="conditions" value="Diabetes"> Diabetes<br>
+        <input type="checkbox" name="conditions" value="High Blood Pressure"> High Blood Pressure<br>
+        <input type="checkbox" name="conditions" value="Heart Disease"> Heart Disease<br>
+        <input type="checkbox" name="conditions" value="Asthma"> Asthma<br>
+        <input type="checkbox" name="conditions" value="Arthritis"> Arthritis
+    </td>
+
+    <td colspan="3" class="reason-cell">
+        <strong class="section-title">Reason for Visit <span class="required">*</span></strong><br>
+        <textarea class="fixed-textarea" name="reason_for_visit" id="reason_for_visit"
+                  oninput="validateReason()"
+                  onblur="validateReason()"  
+                  required></textarea>
+        <div id="reasonError" class="error-message"></div>
+    </td>
+</tr>
+
+<!-- BUTTONS -->
+<tr>
+    <td colspan="6" class="buttons">
+        <input type="reset" value="Restart">
+        <input type="button" value="Review" onclick="showReview()">
+        <input type="button" value="Validate" onclick="showValidate()">
+        <input type="submit" value="Submit →" style="display:none;">
+    </td>
+</tr>
+
+</table>
+</form>
+<!-- ================= REVIEW DISPLAY ================= -->
+    
+<div id="reviewSection" style="margin-top:20px; border:1px solid black; padding:15px; display:none;">
+        <h3>PLEASE REVIEW THIS INFORMATAION BEFORE SUBMITTING</h3>
+        <div id="reviewContent"></div>
+</div>
+    
+<!-- ================= FOOTER ================= -->
+<div id="footer">
+    Aegis Medical | PO Box 52914 | Houston, TX 77083 | support@aegismedical.com<br>
+    <button>Contact Us</button>
+</div>
+
+<!-- End of patient-form.html -->
+<script src="script.js"></script>
+</body>
+</html>
