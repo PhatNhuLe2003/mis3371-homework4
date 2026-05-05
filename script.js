@@ -154,6 +154,17 @@ function validateFirstName()
       errorBox.innerText = "First name must be 1-30 letters only.";
       return false;
     }
+  
+    let remember = document.getElementById("rememberMe");
+
+    if (remember && remember.checked)
+    {
+      setCookie("firstName", first, 48);
+    }
+    else
+    {
+      deleteCookie("firstName");
+    }
 
     errorBox.style.color = "green";
     errorBox.innerText = "Valid first name";
@@ -462,7 +473,26 @@ function showValidate()
 window.onload = function()
 {
         showDate();
-        
+        let firstName = getCookie("firstName");
+        let welcome = document.getElementById("welcomeMessage");
+        let newUserBox = document.getElementById("newUserBox");
+
+        if (firstName !== "")
+        {
+          welcome.innerText = "Welcome back, " + firstName;
+
+          newUserBox.innerHTML = `
+            <label>
+                Not ${firstName}?
+                <button onclick="startNewUser()">Click HERE</button>
+            </label>
+          `;
+        }
+        else
+        {
+          welcome.innerText = "Welcome New User";
+        }
+  
 document.querySelector('input[name="phone"]').addEventListener('input', function(e)
         {
                 let value = e.target.value.replace(/\D/g, '');
@@ -559,4 +589,41 @@ function updatePainValue()
 {
         const value = document.getElementById("pain").value;
         document.getElementById("painValue").innerText = value;
+}
+
+function setCookie(name, value, hours)
+{
+  let d = new Date();
+  d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name)
+{
+  let cname = name + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+
+  for(let i = 0; i < ca.length; i++)
+  {
+    let c = ca[i].trim();
+    if (c.indexOf(cname) === 0)
+    {
+      return c.substring(cname.length, c.length);
+    }
+  }
+  return "";
+}
+
+function deleteCookie(name)
+{
+  document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function startNewUser()
+{
+  deleteCookie("firstName");
+  localStorage.clear();
+  location.reload();
 }
