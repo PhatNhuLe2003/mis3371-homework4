@@ -492,8 +492,11 @@ window.onload = function()
         {
           welcome.innerText = "Welcome New User";
         }
-  
-        loadLocalData();
+
+        loadStates().then(function()
+        {
+          loadLocalData();
+        });
   document.querySelectorAll("input, select, textarea").forEach(function(field)
         {                                                       
           field.addEventListener("blur", saveLocalData);
@@ -676,4 +679,32 @@ function loadLocalData()
   document.getElementById("reason_for_visit").value = localStorage.getItem("reason_for_visit") || "";
 
   updatePainValue();
+}
+
+async function loadStates()
+{
+  try
+  {
+    const response = await fetch("states.txt");
+    const data = await response.text();
+
+    const states = data.split("\n");
+    const dropdown = document.getElementById("state1");
+
+    states.forEach(state =>
+    {
+      const trimmed = state.trim();
+      if (trimmed !== "")
+      {
+        let option = document.createElement("option");
+        option.value = trimmed;
+        option.textContent = trimmed;
+        dropdown.appendChild(option);
+      }
+    });  
+  }
+  catch(error)
+  {
+    console.error("Error loading states:", error);
+  }
 }
