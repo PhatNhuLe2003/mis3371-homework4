@@ -26,7 +26,9 @@ In the HTML code, I added a couple constructure in order for the HTML form to wo
             <span class="aegis">Aegis</span>
             <span class="medical">Medical</span>
         </h1>
-        <p>Today is: <span id="today"></span></p>
+            <p>Today is: <span id="today"></span></p>
+            <p id="welcomeMessage" style="margin-top:5px;">Welcome New User</p>
+        <div id="newUserBox" style="margin-top:5px;"></div>
     </div>
 </div>
 
@@ -71,7 +73,7 @@ In the HTML code, I added a couple constructure in order for the HTML form to wo
         title="Enter 1-30 characters, Letters, apostrophes, and dashes only">
       <div id="lastNameError" class="error-message"></div>
   </td>
-</tr>
+</tr> 
 <!-- DOB / SSN -->
 <tr>
     <td colspan="3">Date of Birth (MM/DD/YYYY) <span class="required">*</span></td>
@@ -316,7 +318,15 @@ In the HTML code, I added a couple constructure in order for the HTML form to wo
         <div id="reasonError" class="error-message"></div>
     </td>
 </tr>
-
+<!-- COOKIE & LOCAL STORAGE -->
+<tr>
+    <td colspan="6">
+        <label>
+            <input type="checkbox" id="rememberMe" checked>
+            Remember Me (save my info for next time)
+        </label>    
+    </td>
+</tr>    
 <!-- BUTTONS -->
 <tr>
     <td colspan="6" class="buttons">
