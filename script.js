@@ -484,7 +484,7 @@ window.onload = function()
           newUserBox.innerHTML = `
             <label>
                 Not ${firstName}?
-                <button onclick="startNewUser()">Click HERE</button>
+                <button type="button" onclick="startNewUser()">Click HERE</button>
             </label>
           `;
         }
@@ -493,7 +493,14 @@ window.onload = function()
           welcome.innerText = "Welcome New User";
         }
   
-document.querySelector('input[name="phone"]').addEventListener('input', function(e)
+        loadLocalData();
+  document.querySelectorAll("input, select, textarea").forEach(function(field)
+        {                                                       
+          field.addEventListener("blur", saveLocalData);
+          field.addEventListener("change", saveLocalData);
+        });  
+                                                                    
+  document.querySelector('input[name="phone"]').addEventListener('input', function(e)
         {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length >= 6)
@@ -504,7 +511,7 @@ document.querySelector('input[name="phone"]').addEventListener('input', function
                 else
                         e.target.value = value;                    
         });
-document.getElementById("ssn").addEventListener("input", function(e)
+  document.getElementById("ssn").addEventListener("input", function(e)
         {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length >=5)
@@ -626,4 +633,47 @@ function startNewUser()
   deleteCookie("firstName");
   localStorage.clear();
   location.reload();
+}
+
+function saveLocalData()
+{
+  if (!document.getElementById("rememberMe").checked)
+  {
+    localStorage.clear();
+    return;
+  }
+
+  localStorage.setItem("first_name", document.getElementById("first_name").value);
+  localStorage.setItem("last_name", document.getElementById("last_name").value);
+  localStorage.setItem("middle_initial", document.getElementById("middle_initial").value);
+  localStorage.setItem("address1", document.getElementById("address1").value);
+  localStorage.setItem("city1", document.getElementById("city1").value);
+  localStorage.setItem("state1", document.getElementById("state1").value);
+  localStorage.setItem("zip1", document.getElementById("zip1").value);
+  localStorage.setItem("email", document.getElementById("email").value);
+  localStorage.setItem("phone", document.getElementById("phone").value);
+  localStorage.setItem("pain", document.getElementById("pain").value);
+  localStorage.setItem("reason_for_visit", document.getElementById("reason_for_visit").value);
+}
+
+function loadLocalData()
+{
+  if (getCookie("firstName") === "")
+  {
+    return;
+  }
+
+  document.getElementById("first_name").value = localStorage.getItem("first_name") || "";
+  document.getElementById("last_name").value = localStorage.getItem("last_name") || "";
+  document.getElementById("middle_initial").value = localStorage.getItem("middle_initial") || "";
+  document.getElementById("address1").value = localStorage.getItem("address1") || "";
+  document.getElementById("city1").value = localStorage.getItem("city1") || "";
+  document.getElementById("state1").value = localStorage.getItem("state1") || "";
+  document.getElementById("zip1").value = localStorage.getItem("zip1") || "";
+  document.getElementById("email").value = localStorage.getItem("email") || "";
+  document.getElementById("phone").value = localStorage.getItem("phone") || "";
+  document.getElementById("pain").value = localStorage.getItem("pain") || "5";
+  document.getElementById("reason_for_visit").value = localStorage.getItem("reason_for_visit") || "";
+
+  updatePainValue();
 }
