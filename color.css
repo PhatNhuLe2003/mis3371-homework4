@@ -2,11 +2,12 @@
 Program name: color.css
 Author: Phat Le
 Date created: 02/08/2026
-Date last edited: 04/15/2026
-Version: 3.0
-Description: This is my 2nd assignment for MIS 3371, where I use HTML and CSS to create a patient registration form for Aegis Medical. 
-Captures demographic and medical information. This part is my CSS coding to organize smaller details visually and brighten the form with splashes of colors.
-Additionally, I added a error message to inform users that the input they put is incorrect or did not meet the requirement.
+Date last edited: 05/06/2026
+Version: 4.0
+Description: This is my 4th assignment for MIS 3371 in which I build a patient registration form for Aegis Medical through HTML, CSS, and JavaScript.
+This particular CSS document is made with the objective of creating visual structure for the webpage layout and improving user experience via colors, margins, borders, and formatting.
+Moreover, this stylesheet is compatible with Assignment 4 elements like footer for content protection, responsive form, error message styling, and overall webpage presentation. 
+Furthermore, the form is supported by JavaScript validation, cookies, localStorage, Fetch API, and iFrame across the website.
 */
 
 
