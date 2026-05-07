@@ -2,10 +2,12 @@
 Program name: script.js
 Author: Phat Le
 Date created: 03/20/2026
-Date last edited: 04/15/2026
+Date last edited: 05/06/2026
 Version: 3.0
-Descriptiton: This is my javascript of the codes required to make my Medical website.
-              These code adds additional quality of life attributes to the websites such as: Password varification, SSN formatting, DOB Verificationm, and others using Methods that verify user inputs on the fly..
+Descriptiton: This JS file holds the functionalities and validation required on the Aegis Medical patient registration website.
+These scripts will be used to enhance user experience, validate user input in real time, and add more Assignment 4 functionalities by using JavaScript functions and storage capabilities in the browser.
+Functionalities included in this file include password confirmation, social security number formatting, date of birth validation, email validation, phone validation, ZIP code validation, dynamic review creation, cookies for tracking returning users, local storage for saving non-sensitive information in forms, and Fetch API for fetching dynamic state selections from an external text file.
+Remember Me functionality, validation and review button functionalities, automatic formatting, and customized welcoming message for returning users are some other features included in this file.
 */
 function showDate()     
         {
