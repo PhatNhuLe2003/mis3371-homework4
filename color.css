@@ -38,10 +38,10 @@ h2
   }
 
 .required
-{
+  {
   color: #FF0000;
   font-weight: bold;
-}
+  }
 
 #banner 
   {
@@ -49,6 +49,10 @@ h2
     align-items: center;
     padding: 15px;
     border-bottom: 3px solid #0b3c6d;
+    position: sticky;
+    top: 0;
+    background-color: #DCDCF7;
+    z-index: 1000;
   } 
 
 #banner img 
